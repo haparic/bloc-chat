@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
+import {Route, Link } from 'react-router-dom';
 import './App.css';
 import * as firebase from 'firebase';
-//import RoomList from './components/RoomList';
-
+import RoomList from './components/RoomList';
 
   // Initialize Firebase
   var config = {
@@ -20,11 +20,12 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          
-            hohoho
         
-        </header>
+            <main>
+              <RoomList firebase={firebase}/>
+            </main>
+        
+        
       </div>
     );
   }
