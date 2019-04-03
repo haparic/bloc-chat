@@ -5,7 +5,7 @@ class RoomList extends Component{
         super(props);
         this.state = {
             rooms: [],
-            name: ''
+            name: " "
         };
         this.roomsRef = this.props.firebase.database().ref('rooms');
         console.log(this.roomsRef);
@@ -33,7 +33,7 @@ render() {
             <h2>Room List</h2>
             <ul className='roomList'>
                 {this.state.rooms.map( (room) =>
-                    <li className="roomNames" key={room.key}>{room.title}</li>
+                    <li className="roomNames" key={room.key}>{room.name}</li>
                 )}
             </ul>
         </div>
