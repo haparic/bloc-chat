@@ -46,16 +46,18 @@ class Users extends Component {
 
 render () {
   return(
-    <div className="sign in button">
+   /* <div className="sign in button">
     <button className="sign in" onClick= {this.signIn}>Log In</button>
-    <button className="sign out" onClick= {this.signOut}>Log out</button>
+    <button className="sign out" onClick= {this.signOut}>Log out</button> 
       if (signIn == True) {
       <h1>Welcome Back {this.props.user.displayName}</h1>
       }
       else {
+        */
+    <div>
         <h1>Guest</h1>
-      }
-    </div>
+      
+    </div> 
   )
 }
 }
