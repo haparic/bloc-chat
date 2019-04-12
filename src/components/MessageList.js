@@ -36,7 +36,7 @@ class MessageList extends Component {
     render() { //addMessage is the only showing up instead of content, roomID, sentAt, and Username
         const messageForm = (
             <form onSubmit={this.newMessage}>
-            <input type="text" value={this.state.messages.addMessage} placeholder="Chat with the community" onChange={this.handleChange} />
+            <input type="text" value={this.state.messages.addMessage} placeholder="Chat with the us" onChange={this.handleChange} />
             <input type="submit" value="submit" />
             </form>
         )
