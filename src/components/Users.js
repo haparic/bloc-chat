@@ -3,9 +3,6 @@ import React, { Component } from 'react';
 class Users extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            displayName: []
-        };
         this.signIn = this.signIn.bind(this);
         this.signOut = this.signOut.bind(this);
        /* this.usersRef = this.props.firebase.database().ref('users');
