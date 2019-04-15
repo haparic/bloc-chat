@@ -23,12 +23,15 @@ class MessageList extends Component {
           this.setState({messages: this.state.messages.concat( message )})
         }); 
     }
-    newMessage(e) {
-        e.preventDefault();
-        this.messagesRef.push({ addMessage: this.state.addMessage });
+    newMessage(addMessage) {
+        addMessage.preventDefault()
+        this.messagesRef.push({ 
+            content: addMessage,
+            roomID: this.props.activeRoom.key,
+            sentAt: Date.now(),
+            username: this.props.user
+        });
         this.setState({ addMessage: "" });
-        this.setState({roomID: '== this.props.activeRoom'}) //want to make it equal to the active room
-        this.setState({username:'this.props.username'})
     }
     handleChange(e) {
         this.setState({ addMessage: e.target.value });
@@ -36,7 +39,7 @@ class MessageList extends Component {
     render() { //addMessage is the only showing up instead of content, roomID, sentAt, and Username
         const messageForm = (
             <form onSubmit={this.newMessage}>
-            <input type="text" value={this.state.messages.addMessage} placeholder="Chat with the us" onChange={this.handleChange} />
+            <input type="text" value={this.state.messages.addMessage} placeholder="Chat with us" onChange={this.handleChange} />
             <input type="submit" value="submit" />
             </form>
         )
