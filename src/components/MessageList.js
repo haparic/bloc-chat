@@ -26,16 +26,30 @@ class MessageList extends Component {
     newMessage(addMessage) {
         addMessage.preventDefault()
         this.messagesRef.push({ 
-            content: addMessage,
-            roomID: this.props.activeRoom.key,
-            sentAt: Date.now(),
-            username: this.props.user
+            username: this.props.user,
+            content: this.state.content,
+            sentAt: this.props.firebase.database.ServerValue.TIMESTAMP,
+            roomId: this.props.activeRoom.key
         });
-        this.setState({ addMessage: "" });
+        this.setState({ username: "", content: "", sentAt:"", roomID:"" });
     }
     handleChange(e) {
-        this.setState({ addMessage: e.target.value });
-    }
+        e.preventDefault();
+        this.setState({
+        username: this.props.user,
+        content: e.target.value,
+        sentAt: this.props.firebase.database.ServerValue.TIMESTAMP,
+        roomId: this.props.activeRoom
+        });
+  }
+
+
+
+
+
+
+
+
     render() { //addMessage is the only showing up instead of content, roomID, sentAt, and Username
         const messageForm = (
             <form onSubmit={this.newMessage}>
