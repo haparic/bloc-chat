@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
 
-class Users extends Component {
+class User extends Component {
     constructor(props) {
         super(props);
         this.signIn = this.signIn.bind(this);
         this.signOut = this.signOut.bind(this);
-       /* this.usersRef = this.props.firebase.database().ref('users');
-        this.createNewUser = this.createNewUser.bind(this);
-        this.handleChange = this.handleChange.bind(this); */
     }
 
     componentDidMount() {
@@ -17,32 +14,16 @@ class Users extends Component {
       }
       
       signIn() {
-        this.props.firebase.auth().signInWithPopup( new this.props.firebase.auth.GoogleAuthProvider() );
+        const provider = new this.props.firebase.auth.GoogleAuthProvider();
+        this.props.firebase.auth().signInWithPopup( provider ).then(function(result) {
+          console.log(result);
+      });
       }
       
       signOut() {
         this.props.firebase.auth().signOut();
       }
-    /*componentDidMount() {
-        this.usersRef.on('child_added', snapshot => {
-          const user = snapshot.val();
-          user.key = snapshot.key;
-          this.setState({username: this.state.username.concat( user )})
-        }); 
-    }
-    createNewUser(e) {
-    e.preventDefault();
-      this.usersRef.push({ user: this.state.user });
-      this.setState({ user: "" });
-    }
-    handleChange(e) {
-      this.setState({ user: e.target.value });
-    }
-    activeUser(e,user) {
-        console.log('activeUser')
-        this.props.setActiveUser(user);
-    }
-} */ 
+    
 
 render () {
   return(
@@ -57,4 +38,4 @@ render () {
 }
 }
 
-export default Users
+export default User
