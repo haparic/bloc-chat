@@ -12,7 +12,7 @@ class MessageList extends Component {
             sentAt: "",
             roomId: ""
         };
-        this.messagesRef = this.props.firebase.database().ref('Messages');
+        this.messagesRef = this.props.firebase.database().ref('messages');
         this.newMessage = this.newMessage.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
