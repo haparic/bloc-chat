@@ -56,7 +56,7 @@ import User from './components/Users';
     
             <main>
     
-              <div className="messagePlane">
+              <div className="message">
                 {showMessages ? (<MessageList firebase={firebase} currentRoom={this.state.currentRoom.key} user={this.state.user} />) : (null) }
               </div>
             </main>
