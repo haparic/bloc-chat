@@ -113,13 +113,6 @@ class MessageList extends Component {
         });
   }
 
-
-
-
-
-
-
-
     render() { 
         const messageForm = (
             <form onSubmit={this.newMessage}>
