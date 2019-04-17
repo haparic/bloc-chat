@@ -50,13 +50,13 @@ import User from './components/Users';
               </h3>
             </header>
     
-            <aside>
+            <aside className='sidebar'>
               <RoomList firebase={firebase} currentRoom={this.setCurrentRoom.bind(this)}/>
             </aside>
     
             <main>
     
-              <div id="messagePlane">
+              <div className="messagePlane">
                 {showMessages ? (<MessageList firebase={firebase} currentRoom={this.state.currentRoom.key} user={this.state.user} />) : (null) }
               </div>
             </main>
