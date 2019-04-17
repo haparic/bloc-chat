@@ -1,5 +1,79 @@
 import React, { Component } from 'react';
 
+
+class RoomList extends Component {
+  constructor(props) {
+    super(props);
+
+
+
+    this.state = {
+      rooms: [],
+      roomName: " ",
+      name: " "
+    };
+
+    this.roomsRef = this.props.firebase.database().ref('rooms');
+  }
+
+
+  componentDidMount() {
+    this.roomsRef.on('child_added', snapshot => {
+      const room = snapshot.val();
+      room.key = snapshot.key;
+      this.setState({rooms: this.state.rooms.concat( room ) });
+    });
+  }
+
+  handleChange(e) {
+    this.setState({ roomName: e.target.value });
+  }
+
+  createRoom(e) {
+    e.preventDefault();
+    this.roomsRef.push({
+        name: this.state.roomName
+    });
+    this.setState({roomName: " "});
+  }
+
+  selectRoom(key) {
+    this.props.currentRoom(key);
+  }
+
+
+  render () {
+    return (
+      <section>
+
+        <div id='roomList'>
+          <h3>Rooms:</h3>
+          <ul>
+            {this.state.rooms.map( ( room ) => {
+              return (
+                <div key={room.key} onClick={(e)=> this.selectRoom(room, e)}> {room.name}</div>
+              )
+            })}
+          </ul>
+        </div>
+
+        <form id='roomInput'>
+          <input type='text' value={this.state.roomName} onChange={(e) => this.handleChange(e)} />
+          <input type= 'submit' onClick= {(e) => this.createRoom(e)} />
+        </form>
+
+      </section>
+    );
+  }
+}
+
+export default RoomList;
+
+
+/*
+
+import React, { Component } from 'react';
+
 class RoomList extends Component{
     constructor(props) {
         super(props);
@@ -29,18 +103,10 @@ class RoomList extends Component{
       }
       activeRoom(e,name) {
           console.log('activeRoom')
-          //this.setState({ room: name });
           this.props.setActiveRoom(name);
       }
       
     
-        /*componentWillUnmount() {
-            this.roomsRef.off("child_added", (snapshot) => {
-                const room = snapshot.val();
-                room.key= snapshot.key;
-                this.setState({rooms: this.state.rooms.concat( room ) })
-            })
-        }*/
       
 
 render() {
@@ -50,11 +116,7 @@ render() {
         <input type="submit" value="Create" />
       </form>
     );
-    /*
-        I want to be able to click on an active room and have the message list from that room show up
-        I have created the active room function and added a portion that says on click
-        I believe I need to add an on change part to it but I am not sure where to
-    */
+
     return(
         <section className='roomChange'>
         <div className='roomListDiv'>
@@ -73,4 +135,4 @@ render() {
     )}
 }
 
-export default RoomList
+export default RoomList */
