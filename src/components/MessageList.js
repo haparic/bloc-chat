@@ -18,6 +18,7 @@ class MessageList extends Component {
   componentDidMount() {
     this.messagesRef.on('child_added', snapshot => {
       const message = snapshot.val();
+      console.log(message);
       message.key = snapshot.key;
       this.setState({messages: this.state.messages.concat( message ) });
     });
@@ -30,19 +31,16 @@ class MessageList extends Component {
   }
 
   createMessage(e, user) {
-    console.log(this.props.user);
     e.preventDefault();
 
     this.messagesRef.push({
       user: this.props.user,
       content: this.state.content,
       sentAt: this.props.firebase.database.ServerValue.TIMESTAMP,
-      roomId: this.props.currentRoom,
+      roomId: this.props.currentRoom.key,
     });
     this.setState({content: ""});
   }
-
-
 
   render() {
 
@@ -59,8 +57,9 @@ class MessageList extends Component {
 
     return (
       <div className='chatMessages'>
-        <div>{messageList}</div>
-        <ul></ul>
+        <div>
+          <p>Messages</p>
+        {messageList}</div>
         <form id="newMessage" >
           <input type='text' value={this.state.content} onChange={(e) => this.handleChange(e)} />
           <input type='submit' onClick={(e) => this.createMessage(e)} />
