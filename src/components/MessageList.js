@@ -18,22 +18,9 @@ class MessageList extends Component {
   componentDidMount() {
     this.messagesRef.on('child_added', snapshot => {
       const message = snapshot.val();
-      console.log(message);
       message.key = snapshot.key;
       this.setState({messages: this.state.messages.concat( message ) });
     });
-  }
-
-  createMessage(e, user) {
-    e.preventDefault();
-
-    this.messagesRef.push({
-      user: this.props.user,
-      content: this.state.content,
-      sentAt: this.props.firebase.database.ServerValue.TIMESTAMP,
-      roomId: this.props.currentRoom.key,
-    });
-    this.setState({content: ""});
   }
 
   handleChange(e) {
@@ -41,6 +28,20 @@ class MessageList extends Component {
       content: e.target.value,
     });
   }
+
+  createMessage(e, user) {
+    console.log(this.props.user);
+    e.preventDefault();
+
+    this.messagesRef.push({
+      user: this.props.user,
+      content: this.state.content,
+      sentAt: this.props.firebase.database.ServerValue.TIMESTAMP,
+      roomId: this.props.currentRoom,
+    });
+    this.setState({content: ""});
+  }
+
 
 
   render() {
@@ -52,16 +53,17 @@ class MessageList extends Component {
 
     .filter(message => message.roomId === currentRoom)
     .map(message => {
-      return <div key={message.key}>{message.user + ":" + message.content + " Sent At:" + message.sentAt}</div>
+      return <div className='thisMessage' key={message.key}>{message.user + ":" + message.content + " Sent At:" + message.sentAt}</div>
     })
 
 
     return (
-      <div className='Messages'>
+      <div className='chatMessages'>
         <div>
           <p>Messages</p>
         {messageList}</div>
-        <form className="newMessages" >
+        <ul></ul>
+        <form id="newMessage" >
           <input type='text' value={this.state.content} onChange={(e) => this.handleChange(e)} />
           <input type='submit' onClick={(e) => this.createMessage(e)} />
         </form>
