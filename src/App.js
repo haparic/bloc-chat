@@ -27,7 +27,7 @@ import User from './components/Users';
       };
     }
     
-    setCurrentRoom(room ) {
+    setRoom(room ) {
       this.setState({currentRoom: room})
     }
     
@@ -44,19 +44,17 @@ import User from './components/Users';
         return (
           <div className='App'>
             <header>
-              <h1>Chat:  {this.state.currentRoom.name}</h1>
-              <h3>
+              <h1>Bloc Chat-  {this.state.currentRoom.name}</h1>
+              <h4>
+                Welcome, 
                 <User firebase = {firebase} setUser={this.setUser.bind(this)} user={this.state.user} />
-              </h3>
+              </h4>
             </header>
-    
             <aside className='sidebar'>
-              <RoomList firebase={firebase} currentRoom={this.setCurrentRoom.bind(this)}/>
+              <RoomList firebase={firebase} currentRoom={this.setRoom.bind(this)}/>
             </aside>
-    
             <main>
-    
-              <div className="message">
+              <div className="messageList">
                 {showMessages ? (<MessageList firebase={firebase} currentRoom={this.state.currentRoom.key} user={this.state.user} />) : (null) }
               </div>
             </main>
@@ -66,88 +64,3 @@ import User from './components/Users';
     }
     
     export default App;
-    
-/*
-  class App extends Component {
-    constructor(props) {
-      super(props);
-      this.state = {
-        activeRoom: '',
-        currentUser: null,
-      };
-  
-      this.setActiveRoom = this.setActiveRoom.bind(this);
-      this.setUser = this.setUser.bind(this);
-    }
-  
-    setActiveRoom(room) {
-      this.setState({ activeRoom: room });
-    }
-  
-    setUser(user) {
-      this.setState({ currentUser: user});
-    }
-  
-  
-    render() {
-      return (
-        <div className="App">
-          <h1 className="App-title">BLOC CHAT</h1>
-  
-          <aside id="sidebar">
-            <RoomList firebase={firebase} setActiveRoom={this.setActiveRoom} />
-            { this.state.activeRoom ?
-              (<MessageList firebase={firebase} activeRoom={this.state.activeRoom} currentUser={this.state.currentUser}/>) : (null)
-            }
-          </aside>
-          <h3 className="chatRooms">{this.state.activeRoom.name || "Your Chat Rooms"}</h3>
-          <User firebase={firebase} currentUser={this.state.currentUser} setUser={this.setUser}/>
-        </div>
-      );
-    }
-  }
-  
-  export default App;
- 
-  
-
-class App extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-    activeRoom: "",
-    username: null
-    };
-    this.activeRoom = this.activeRoom.bind(this);
-    this.activeUser = this.activeUser.bind(this);
-  }
-  
-  activeRoom(room){
-    this.setState({activeRoom:room});
-  }
-  activeUser(user) {
-    if (user === null ) {
-      return this.setState({ user: "Guest"})
-    } else return this.setState({user: user.displayName})
-  }
-
-  render() {
-    return (
-      <div className="App">
-          <div className="sidebar">
-          <RoomList activeRoom={this.state.activeRoom} firebase={firebase} setActiveRoom={(name)=>this.activeRoom(name)}/>
-          </div>
-          <div>
-            <User username=
-            {this.state.username} firebase={firebase} activeUser={(user)=>this.username(user)}/>
-          </div>
-            <main>
-              <MessageList activeRoom={this.state.activeRoom} firebase={firebase}/>
-            </main>
-      </div> 
-    );
-  } 
-} 
-
-export default App
-*/
