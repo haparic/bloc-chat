@@ -20,7 +20,7 @@ class User extends Component {
 
   signOut(){
     this.props.firebase.auth().signOut().then((result) => {
-      console.log("sign out successful");
+      console.log("signed out");
       this.props.setUser(null);
     });
   }
@@ -33,16 +33,14 @@ class User extends Component {
 
   render () {
     return (
-
       <section>
-        <div id="user-name">{this.props.user}</div>
+        <div className="username">{this.props.user}</div>
 
         {this.props.user === 'Guest' ?
-            <button id="sign-in" onClick={() => this.signIn()}>Log In</button>
+            <button className="signIn" onClick={() => this.signIn()}>Log In</button>
           :
-            <button id="sign-out" onClick={() => this.signOut()}>Log Out</button>
+            <button className="signOut" onClick={() => this.signOut()}>Log Out</button>
           }
-          {console.log(this.props.user)}
       </section>
 
     );
