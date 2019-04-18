@@ -27,7 +27,7 @@ import User from './components/Users';
       };
     }
     
-    setRoom(room ) {
+    setCurrentRoom(room ) {
       this.setState({currentRoom: room})
     }
     
@@ -44,17 +44,19 @@ import User from './components/Users';
         return (
           <div className='App'>
             <header>
-              <h1>Bloc Chat-  {this.state.currentRoom.name}</h1>
-              <h4>
-                Welcome, 
+              <h1>Chat:  {this.state.currentRoom.name}</h1>
+              <h3>
                 <User firebase = {firebase} setUser={this.setUser.bind(this)} user={this.state.user} />
-              </h4>
+              </h3>
             </header>
+    
             <aside className='sidebar'>
-              <RoomList firebase={firebase} currentRoom={this.setRoom.bind(this)}/>
+              <RoomList firebase={firebase} currentRoom={this.setCurrentRoom.bind(this)}/>
             </aside>
+    
             <main>
-              <div className="messageList">
+    
+              <div className="message">
                 {showMessages ? (<MessageList firebase={firebase} currentRoom={this.state.currentRoom.key} user={this.state.user} />) : (null) }
               </div>
             </main>
