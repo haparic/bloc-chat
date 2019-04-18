@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 
+
 class RoomList extends Component {
   constructor(props) {
     super(props);
+
+
+
     this.state = {
       rooms: [],
       roomName: " ",
@@ -33,7 +37,7 @@ class RoomList extends Component {
     this.setState({roomName: " "});
   }
 
-  activeRoom(key) {
+  selectRoom(key) {
     this.props.currentRoom(key);
   }
 
@@ -47,14 +51,14 @@ class RoomList extends Component {
           <ul>
             {this.state.rooms.map( ( room ) => {
               return (
-                <div key={room.key} onClick={(e)=> this.activeRoom(room, e)}> {room.name}</div>
+                <div key={room.key} onClick={(e)=> this.selectRoom(room, e)}> {room.name}</div>
               )
             })}
           </ul>
         </div>
-            <h2>Create New Room</h2>
+
         <form className='roomInput'>
-          <input type='text' value={this.state.roomName} placeholder="Enter New Room" onChange={(e) => this.handleChange(e)} />
+          <input type='text' value={this.state.roomName} onChange={(e) => this.handleChange(e)} />
           <input type= 'submit' onClick= {(e) => this.createRoom(e)} />
         </form>
 
