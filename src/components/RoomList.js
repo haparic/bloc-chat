@@ -32,7 +32,7 @@ class RoomList extends Component {
   createRoom(e) {
     e.preventDefault();
     this.roomsRef.push({
-        name: this.state.roomName
+    name: this.state.roomName
     });
     this.setState({roomName: " "});
   }
@@ -46,8 +46,8 @@ class RoomList extends Component {
     return (
       <section>
 
-        <div id='roomList'>
-          <h3>Rooms:</h3>
+        <div className='roomList'>
+          <h2>Rooms:</h2>
           <ul>
             {this.state.rooms.map( ( room ) => {
               return (
@@ -57,7 +57,7 @@ class RoomList extends Component {
           </ul>
         </div>
 
-        <form id='roomInput'>
+        <form className='roomInput'>
           <input type='text' value={this.state.roomName} onChange={(e) => this.handleChange(e)} />
           <input type= 'submit' onClick= {(e) => this.createRoom(e)} />
         </form>
